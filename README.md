@@ -31,8 +31,10 @@ to have to wait for a release, you can track the branch instead:
 gem 'activeadmin', github: 'gregbell/active_admin', branch: '0-6-stable'
 ```
 
+## Documentation
+
 Please note that <http://activeadmin.info> is out of date. For the latest docs, check out the
-Github repo itself.
+Github [docs folder](https://github.com/gregbell/active_admin/tree/master/docs) and the [wiki](https://github.com/gregbell/active_admin/wiki).
 
 ## Links
 
@@ -45,10 +47,9 @@ Github repo itself.
 
 ## Goals
 
-1. Allow developers to quickly create gorgeous administration interfaces __(Not Just CRUD)__
+1. Enable developers to quickly create good-looking administration interfaces.
 2. Build a DSL for developers and an interface for businesses.
-3. Ensure that developers can easily customize every nook and cranny of the interface.
-4. Build common interfaces as shareable gems so that the entire community benefits.
+3. Ensure that developers can easily customize every nook and cranny.
 
 ## Getting started
 

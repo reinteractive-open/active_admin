@@ -2,6 +2,7 @@ language: ruby
 install:
   - time ./script/travis_cache download_bundle
   - time bundle install --without development --path=./bundle
+  - bundle clean # delete now-outdated gems
   - time ./script/travis_cache download_app
   - time bundle exec rake setup
   - time ./script/travis_cache upload
@@ -9,7 +10,7 @@ script:
   - time bundle exec rake test_with_coveralls
 rvm:
   - 1.9.3
-  - 2.1.1
+  - 2.1.2
 env:
   matrix:
     - RAILS=3.2.18

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe ActiveAdmin::PunditAdapter do
 
@@ -19,7 +19,7 @@ describe ActiveAdmin::PunditAdapter do
     end
 
     it "should scope the collection" do
-      class RSpec::Mocks::MockPolicy < ApplicationPolicy
+      class RSpec::Mocks::DoublePolicy < ApplicationPolicy
         class Scope < Struct.new(:user, :scope)
           def resolve
             scope

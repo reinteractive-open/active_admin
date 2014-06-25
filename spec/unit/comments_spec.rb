@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe "Comments" do
   let(:application) { ActiveAdmin::Application.new }
@@ -54,7 +54,10 @@ describe "Comments" do
       let(:post) { Post.create!(title: "Testing.") }
       let(:post_decorator) { double 'PostDecorator' }
 
-      before { post_decorator.stub model: post, :decorated? => true }
+      before do
+        allow(post_decorator).to receive(:model).and_return(post)
+        allow(post_decorator).to receive(:decorated?).and_return(true)
+      end
 
       context "when a decorated object is passed" do
         let(:resource) { post_decorator }
@@ -115,13 +118,13 @@ describe "Comments" do
       it "should have comments when the namespace allows comments" do
         ns = ActiveAdmin::Namespace.new(application, :admin)
         ns.allow_comments = true
-        expect(ns.comments?).to be_true
+        expect(ns.comments?).to be_truthy
       end
 
       it "should not have comments when the namespace does not allow comments" do
         ns = ActiveAdmin::Namespace.new(application, :admin)
         ns.allow_comments = false
-        expect(ns.comments?).to be_false
+        expect(ns.comments?).to be_falsey
       end
     end
   end
@@ -132,13 +135,13 @@ describe "Comments" do
       resource = ActiveAdmin::Resource.new(ns, Post)
       expect(resource.comments).to be_nil
       resource.comments = true
-      expect(resource.comments).to be_true
+      expect(resource.comments).to be_truthy
     end
     it "should disable comments if set to false" do
       ns = ActiveAdmin::Namespace.new(application, :admin)
       resource = ActiveAdmin::Resource.new(ns, Post)
       resource.comments = false
-      expect(resource.comments?).to be_false
+      expect(resource.comments?).to be_falsey
     end
   end
 end

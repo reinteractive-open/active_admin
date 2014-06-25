@@ -27,7 +27,17 @@ ActiveAdmin.register Post do
 end
 ```
 
-For nested associations in your form, this is how you define their attributes:
+Any form field that sends multiple values (such as a HABTM association, or an array attribute)
+needs to pass an empty array to `permit_params`:
+
+```ruby
+ActiveAdmin.register Post do
+  permit_params :title, :content, :publisher_id, roles: []
+end
+```
+
+Nested associations in the same form also require an array, but it
+needs to be filled with any attributes used.
 
 ```ruby
 ActiveAdmin.register Post do
@@ -60,7 +70,7 @@ ActiveAdmin.register Post do
   controller do
     def create
       # Good
-      @post = Post.new(permitted_params)
+      @post = Post.new(permitted_params[:post])
       # Bad
       @post = Post.new(params[:post])
 
@@ -210,7 +220,7 @@ name? Well, you have to refer to it by its `:id`.
 
 ```ruby
 # config/initializers/active_admin.rb
-config.namespace :admin do |admin
+config.namespace :admin do |admin|
   admin.build_menu do |menu|
     menu.add id: 'blog', label: proc{"Something dynamic"}, priority: 0
   end
